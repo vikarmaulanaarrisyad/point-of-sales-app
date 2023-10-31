@@ -31,6 +31,9 @@
 
     <link rel="stylesheet" href="{{ asset('AdminLTE') }}/plugins/summernote/summernote-bs4.min.css">
 
+    <link rel="stylesheet" href="{{ asset('/AdminLTE/plugins/sweetalert2/sweetalert2.min.css') }}">
+
+
     @stack('css_vendor')
 
     <link rel="stylesheet" href="{{ asset('AdminLTE') }}/dist/css/adminlte.min.css?v=3.2.0">
@@ -72,12 +75,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Dashboard</h1>
+                            <h1 class="m-0">@yield('title')</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v1</li>
+                                @section('breadcrumb')
+                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                                @show
                             </ol>
                         </div>
                     </div>
@@ -127,6 +131,8 @@
 
     <script src="{{ asset('AdminLTE') }}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
+    <script src="{{ asset('/AdminLTE/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
     @stack('scripts_vendor')
 
     <script src="{{ asset('AdminLTE') }}/dist/js/adminlte.js?v=3.2.0"></script>
@@ -135,7 +141,7 @@
 
     <script src="{{ asset('AdminLTE') }}/dist/js/pages/dashboard.js"></script>
 
-    <script src="{{ asset('/js/custom.js') }}"></script>
+    <script src="{{ asset('/js/custome.js') }}"></script>
 
     @stack('scripts')
 </body>
