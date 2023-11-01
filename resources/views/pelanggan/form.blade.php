@@ -7,16 +7,16 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="nama_kategori">Nama Kategori <span class="text-danger">*</span> </label>
-                <input type="text" name="nama_kategori" class="form-control" id="nama_kategori" autocomplete="off" placeholder="Nama kategori">
+                <label for="nama_pelanggan">Nama Pelanggan <span class="text-danger">*</span> </label>
+                <input type="text" name="nama_pelanggan" class="form-control" id="nama_pelanggan" autocomplete="off">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="keterangan">Keterangan</label>
-                <input type="text" name="keterangan" class="form-control" id="keterangan" autocomplete="off" placeholder="Keterangan">
+                <label for="nomor_pelanggan">No. HP</label>
+                <input type="text" name="nomor_pelanggan" class="form-control" id="nomor_pelanggan" autocomplete="off" placeholder="example : 0878xxxxxxxx">
             </div>
         </div>
     </div>

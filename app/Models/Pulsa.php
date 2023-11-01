@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Produk extends Model
+class Pulsa extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    public function kategori()
+    public function provider()
     {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(Provider::class);
     }
 }

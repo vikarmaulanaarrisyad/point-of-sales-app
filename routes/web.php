@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\{
     DashboardController,
-    KategoriController,
+    PelangganController,
+    ProviderController,
+    ProdukController,
+    PulsaController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::group([
@@ -27,6 +30,21 @@ Route::group([
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
-    Route::get('/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
-    Route::resource('/kategori', KategoriController::class);
+    // Pelanggan
+    Route::get('/pelanggan/data', [PelangganController::class, 'data'])->name('pelanggan.data');
+    Route::resource('/pelanggan', PelangganController::class);
+
+    // Provider
+    Route::get('/provider/data', [ProviderController::class, 'data'])->name('provider.data');
+    Route::resource('/provider', ProviderController::class);
+    Route::get('/ajax/provider/search', [ProviderController::class, 'search'])->name('provider.search');
+
+    // Pulsa
+    Route::get('/pulsa/data', [PulsaController::class, 'data'])->name('pulsa.data');
+    Route::resource('/pulsa', PulsaController::class);
+
+    // Produk
+    Route::get('/produk/data', [ProdukController::class, 'data'])->name('produk.data');
+    Route::resource('/produk', ProdukController::class)->except('edit');
+    Route::get('/produk/{produk}/detail', [ProdukController::class, 'detail'])->name('produk.detail');
 });
