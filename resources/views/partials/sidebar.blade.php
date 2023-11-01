@@ -44,11 +44,29 @@
                         </li>
                         <li class="nav-header">MASTER</li>
                         <li class="nav-item">
-                            <a href="{{ route('kategori.index') }}"
-                                class="nav-link {{ request()->is('kategori*') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-cube"></i>
+                            <a href="{{ route('pelanggan.index') }}"
+                                class="nav-link {{ request()->is('pelanggan*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-users"></i>
                                 <p>
-                                    Kategori
+                                    Pelanggan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('provider.index') }}"
+                                class="nav-link {{ request()->is('provider*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-wifi"></i>
+                                <p>
+                                    Provider
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('pulsa.index') }}"
+                                class="nav-link {{ request()->is('pulsa*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-mobile-alt"></i>
+                                <p>
+                                    Pulsa
                                 </p>
                             </a>
                         </li>

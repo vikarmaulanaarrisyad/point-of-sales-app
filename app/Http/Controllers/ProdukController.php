@@ -21,6 +21,11 @@ class ProdukController extends Controller
         $query = Produk::with('kategori')->latest()->get();
         return datatables($query)
             ->addIndexColumn()
+            ->addColumn('kode_produk', function ($produk) {
+                return '
+                    <badge class="badge badge-success">' . $produk->kode_produk . '</badge>
+                ';
+            })
             ->addColumn('kategori', function ($produk) {
                 return $produk->kategori->nama_kategori ?? '-';
             })
@@ -139,7 +144,7 @@ class ProdukController extends Controller
             'stok_saat_ini' => $request->stok_awal ?? 0,
         ];
 
-       $produk->update($data);
+        $produk->update($data);
 
         return response()->json(['data' => $data, 'message' => 'Data produk berhasil diperbaharui']);
     }
@@ -149,6 +154,8 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        //TODO: ADD DELETED AT
+        $produk->delete();
+
+        return response()->json(['data' => NULL, 'message' => 'Data produk berhasil dihapus']);
     }
 }

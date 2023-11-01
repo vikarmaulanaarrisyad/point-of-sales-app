@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori;
+use App\Models\Provider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class KategoriController extends Controller
+class ProviderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('kategori.index');
+        return view('provider.index');
     }
 
     /**
-     * Get data kategori
+     * Get data provider
      */
     public function data()
     {
-        $query = Kategori::latest()->get();
+        $query = Provider::latest()->get();
         return datatables($query)
             ->addIndexColumn()
             ->addColumn('aksi', function ($query) {
                 return '
-                <button class="btn btn-sm btn-primary" onclick="editData(`' . route('kategori.show', $query->id) . '`)"><i class="fas fa-pencil-alt"></i></button>
-                <button class="btn btn-sm btn-danger" onclick="deleteData(`' . route('kategori.destroy', $query->id) . '`,`' . $query->nama_kategori . '`)"><i class="fas fa-trash"></i></button>
+                <button class="btn btn-sm btn-primary" onclick="editData(`' . route('provider.show', $query->id) . '`)"><i class="fas fa-pencil-alt"></i></button>
+                <button class="btn btn-sm btn-danger" onclick="deleteData(`' . route('provider.destroy', $query->id) . '`,`' . $query->nama_provider . '`)"><i class="fas fa-trash"></i></button>
                 ';
             })
             ->escapeColumns([])
@@ -48,7 +48,7 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'nama_kategori' => 'required|min:1',
+            'nama_provider' => 'required|min:1',
             'keterangan' => 'nullable',
         ];
 
@@ -59,27 +59,27 @@ class KategoriController extends Controller
         }
 
         $data = [
-            'nama_kategori' => $request->nama_kategori,
+            'nama_provider' => $request->nama_provider,
             'keterangan' => $request->keterangan ?? '-',
         ];
 
-        Kategori::create($data);
+        Provider::create($data);
 
-        return response()->json(['data' => $data, 'message' => 'Data kategori berhasil ditambahkan']);
+        return response()->json(['data' => $data, 'message' => 'Data provider berhasil ditambahkan']);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Kategori $kategori)
+    public function show(Provider $provider)
     {
-        return response()->json(['data' => $kategori]);
+        return response()->json(['data' => $provider]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kategori $kategori)
+    public function edit(Provider $provider)
     {
         //
     }
@@ -87,10 +87,10 @@ class KategoriController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(Request $request, Provider $provider)
     {
         $rules = [
-            'nama_kategori' => 'required|min:1',
+            'nama_provider' => 'required|min:1',
             'keterangan' => 'nullable',
         ];
 
@@ -101,31 +101,31 @@ class KategoriController extends Controller
         }
 
         $data = [
-            'nama_kategori' => $request->nama_kategori,
+            'nama_provider' => $request->nama_provider,
             'keterangan' => $request->keterangan ?? '-',
         ];
 
-        $kategori->update($data);
+        $provider->update($data);
 
-        return response()->json(['data' => $data, 'message' => 'Data kategori berhasil diperbaharui']);
+        return response()->json(['data' => $data, 'message' => 'Data provider berhasil diperbaharui']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kategori $kategori)
+    public function destroy(Provider $provider)
     {
-        $kategori->delete();
+        $provider->delete();
 
-        return response()->json(['data' => NULL, 'message' => 'Data kategori berhasil dihapus']);
+        return response()->json(['data' => NULL, 'message' => 'Data provider berhasil dihapus']);
     }
 
     function search(Request $request)
     {
         $keyword = $request->get('q');
 
-        $kategori = Kategori::where('nama_kategori', "LIKE", "%$keyword%")->get();
+        $provider = Provider::where('nama_provider', "LIKE", "%$keyword%")->get();
 
-        return $kategori;
+        return $provider;
     }
 }

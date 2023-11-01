@@ -17,7 +17,7 @@
                 "processing": "Mohon bersabar..."
             },
             ajax: {
-                url: '{{ route('kategori.data') }}',
+                url: '{{ route('provider.data') }}',
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -25,7 +25,7 @@
                     sortable: false
                 },
                 {
-                    data: 'nama_kategori',
+                    data: 'nama_provider',
                 },
                 {
                     data: 'keterangan',

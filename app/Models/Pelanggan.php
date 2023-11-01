@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Kategori extends Model
+class Pelanggan extends Model
 {
-    use HasFactory, SoftDeletes;
-    protected $table = 'kategoris';
+    use HasFactory;
+    use SoftDeletes;
+
+    protected $table = 'pelanggans';
 }
