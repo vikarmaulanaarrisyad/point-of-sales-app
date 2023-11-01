@@ -3,6 +3,7 @@
 use App\Http\Controllers\{
     DashboardController,
     KategoriController,
+    ProdukController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,13 @@ Route::group([
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
+    // Kategori
     Route::get('/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
     Route::resource('/kategori', KategoriController::class);
+    Route::get('/ajax/kategori/search', [KategoriController::class, 'search'])->name('kategori.search');
+
+    // Produk
+    Route::get('/produk/data', [ProdukController::class, 'data'])->name('produk.data');
+    Route::resource('/produk', ProdukController::class)->except('edit');
+    Route::get('/produk/{produk}/detail', [ProdukController::class, 'detail'])->name('produk.detail');
 });

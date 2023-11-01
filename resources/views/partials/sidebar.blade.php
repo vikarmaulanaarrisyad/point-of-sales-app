@@ -34,7 +34,8 @@
                         data-accordion="false">
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
+                            <a href="{{ route('dashboard') }}"
+                                class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -52,7 +53,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link {{ request()->is('admin/category*') ? 'active' : '' }}">
+                            <a href="{{ route('produk.index') }}" class="nav-link {{ request()->is('produk*') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-cubes"></i>
                                 <p>
                                     Produk

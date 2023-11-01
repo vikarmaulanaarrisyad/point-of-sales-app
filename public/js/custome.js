@@ -33,6 +33,8 @@ function resetForm(selector) {
     $(".custom-file-input").val("");
 
     $(".select2").trigger("change");
+    $(".select2").val("").trigger("change");
+
     $(
         ".form-control, .custom-select, [type=radio], [type=checkbox], [type=file], .select2, .note-editor"
     ).removeClass("is-invalid");

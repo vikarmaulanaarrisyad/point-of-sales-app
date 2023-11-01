@@ -119,4 +119,13 @@ class KategoriController extends Controller
 
         return response()->json(['data' => NULL, 'message' => 'Data kategori berhasil dihapus']);
     }
+
+    function search(Request $request)
+    {
+        $keyword = $request->get('q');
+
+        $kategori = Kategori::where('nama_kategori', "LIKE", "%$keyword%")->get();
+
+        return $kategori;
+    }
 }
