@@ -7,17 +7,17 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="form-group">
-                <label for="nama_produk">Nama Produk <span class="text-danger">*</span> </label>
+                <label for="nama_produk">Nama Vocer <span class="text-danger">*</span> </label>
                 <input type="text" name="nama_produk" class="form-control" id="nama_produk" autocomplete="off"
-                    placeholder="Nama produk">
+                    placeholder="Nama vocer">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="form-group">
-                <label for="kategori">Kategori Produk <span class="text-danger">*</span></label>
-                <select name="kategori" id="kategori" class="select2"></select>
+                <label for="provider">Provider <span class="text-danger">*</span></label>
+                <select name="provider" id="provider" class="select2"></select>
             </div>
         </div>
     </div>

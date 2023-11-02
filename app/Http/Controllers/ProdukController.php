@@ -18,16 +18,11 @@ class ProdukController extends Controller
 
     public function data()
     {
-        $query = Produk::with('kategori')->latest()->get();
+        $query = Produk::with('provider')->latest()->get();
         return datatables($query)
             ->addIndexColumn()
-            ->addColumn('kode_produk', function ($produk) {
-                return '
-                    <badge class="badge badge-success">' . $produk->kode_produk . '</badge>
-                ';
-            })
-            ->addColumn('kategori', function ($produk) {
-                return $produk->kategori->nama_kategori ?? '-';
+            ->addColumn('provider', function ($produk) {
+                return $produk->provider->nama_provider ?? '-';
             })
             ->editColumn('harga_jual', function ($produk) {
                 return format_uang($produk->harga_jual);
@@ -37,7 +32,7 @@ class ProdukController extends Controller
             })
             ->addColumn('aksi', function ($produk) {
                 return '
-                <button class="btn btn-sm btn-success" onclick="detailData(`' . route('produk.detail', $produk->id) . '`)"><i class="fas fa-eye"></i></button>
+                <button class="btn btn-sm btn-success" onclick="detailData(`' . route('produk.detail', $produk->id) . '`,`' . $produk->nama_produk . '`)"><i class="fas fa-eye"></i></button>
                 <button class="btn btn-sm btn-primary" onclick="editData(`' . route('produk.show', $produk->id) . '`)"><i class="fas fa-pencil-alt"></i></button>
                 <button class="btn btn-sm btn-danger" onclick="deleteData(`' . route('produk.destroy', $produk->id) . '`,`' . $produk->nama_produk . '`)"><i class="fas fa-trash"></i></button>
                 ';
@@ -64,7 +59,7 @@ class ProdukController extends Controller
             'harga_jual' => 'required|regex:/^[0-9.]+$/',
             'harga_beli' => 'required|regex:/^[0-9.]+$/',
             'stok_awal' => 'required',
-            'kategori' => 'required',
+            'provider' => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -81,7 +76,7 @@ class ProdukController extends Controller
             'harga_jual' => $hargaJual,
             'harga_beli' => $hargaBeli,
             'stok_awal' => $request->stok_awal,
-            'kategori_id' => $request->kategori,
+            'provider_id' => $request->provider,
             'laba' => $hargaJual - $hargaBeli,
             'stok_awal' => $request->stok_awal ?? 0,
             'stok_akhir' => $request->stok_awal ?? 0,
@@ -98,7 +93,9 @@ class ProdukController extends Controller
      */
     public function show(Produk $produk)
     {
-        $produk->kategori = $produk->kategori;
+        $produk->provider = $produk->provider;
+        $produk->harga_jual = format_uang($produk->harga_jual);
+        $produk->harga_beli = format_uang($produk->harga_beli);
         return response()->json(['data' => $produk]);
     }
 
@@ -107,7 +104,12 @@ class ProdukController extends Controller
      */
     public function detail(Produk $produk)
     {
-        return response()->json(['data' => $produk]);
+        $produk->provider = $produk->provider;
+        $produk->harga_beli = format_uang($produk->harga_beli);
+        $produk->harga_jual = format_uang($produk->harga_jual);
+        $produk->stok = format_uang($produk->stok_akhir);
+        $produk->laba = format_uang($produk->laba);
+        return $produk;
     }
 
     /**
@@ -120,7 +122,7 @@ class ProdukController extends Controller
             'harga_jual' => 'required|regex:/^[0-9.]+$/',
             'harga_beli' => 'required|regex:/^[0-9.]+$/',
             'stok_awal' => 'required',
-            'kategori' => 'required',
+            'provider' => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -137,7 +139,7 @@ class ProdukController extends Controller
             'harga_jual' => $hargaJual,
             'harga_beli' => $hargaBeli,
             'stok_awal' => $request->stok_awal,
-            'kategori_id' => $request->kategori,
+            'provider_id' => $request->provider,
             'laba' => $hargaJual - $hargaBeli,
             'stok_awal' => $request->stok_awal ?? 0,
             'stok_akhir' => $request->stok_awal ?? 0,

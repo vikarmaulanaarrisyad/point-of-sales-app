@@ -2,13 +2,14 @@
     <script>
         let table;
         let modal = '#modal-form';
+        let modalShow = '.modal-detail';
         let button = '#submitBtn';
 
         $(function() {
             $('#spinner-border').hide();
         });
 
-        table = $('.table').DataTable({
+        table = $('#produk').DataTable({
             processing: true,
             serverSide: true,
             autoWidth: false,
@@ -25,19 +26,16 @@
                     sortable: false
                 },
                 {
-                    data: 'kode_produk',
-                },
-                {
                     data: 'nama_produk',
                 },
                 {
-                    data: 'kategori',
-                },
-                {
-                    data: 'harga_jual',
+                    data: 'provider',
                 },
                 {
                     data: 'harga_beli',
+                },
+                {
+                    data: 'harga_jual',
                 },
                 {
                     data: 'stok_akhir',
@@ -89,9 +87,35 @@
 
                     loopForm(response.data);
 
-                    $('#kategori').append(new Option(response.data.kategori.nama_kategori, response.data.kategori.id, true, true));
-                    $('#kategori').trigger('change');
+                    $('#provider').append(new Option(response.data.provider.nama_provider, response.data.provider.id,
+                        true, true));
+                    $('#provider').trigger('change');
 
+                })
+                .fail(errors => {
+                    Swall.fire({
+                        icon: 'error',
+                        title: 'Opps! Gagal',
+                        text: errors.responseJSON.message,
+                        showConfirmButton: true,
+                    });
+                    $('#spinner-border').hide();
+                    $(button).prop('disabled', false);
+                });
+        }
+
+        function detailData(url, name, title = 'Detail Data ') {
+            $.get(url)
+                .done(response => {
+                    const nama = title + `<b>${name}</b>`;
+                    $(modalShow).modal('show');
+                    $(`${modalShow} .modal-title`).html(nama);
+                    $(`${modalShow} #nama_produk`).text(response.nama_produk);
+                    $(`${modalShow} #nama_provider`).text(response.provider.nama_provider);
+                    $(`${modalShow} #harga_beli`).text(response.harga_beli);
+                    $(`${modalShow} #harga_jual`).text(response.harga_jual);
+                    $(`${modalShow} #stok`).text(response.stok);
+                    $(`${modalShow} #laba`).text(response.laba);
                 })
                 .fail(errors => {
                     Swall.fire({
@@ -205,19 +229,19 @@
 
     <script>
         //Initialize Select2 Elements
-        $('#kategori').select2({
-            placeholder: 'Pilih kategori',
+        $('#provider').select2({
+            placeholder: 'Pilih provider',
             theme: 'bootstrap4',
             closeOnSelect: true,
             allowClear: true,
             ajax: {
-                url: '{{ route('kategori.search') }}',
+                url: '{{ route('provider.search') }}',
                 processResults: function(data) {
                     return {
                         results: data.map(function(item) {
                             return {
                                 id: item.id,
-                                text: item.nama_kategori
+                                text: item.nama_provider
                             }
                         })
                     }
