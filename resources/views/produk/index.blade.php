@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Produk')
+@section('title', 'Data Produk')
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Produk</li>
+    <li class="breadcrumb-item active">Data Produk</li>
 @endsection
 
 @section('content')
@@ -13,17 +13,16 @@
             <x-card>
                 <x-slot name="header">
                     <button class="btn btn-sm btn-primary" onclick="addData(`{{ route('produk.store') }}`)"><i
-                            class="fas fa-plus-circle"></i> Tambah Produk</button>
+                            class="fas fa-plus-circle"></i> Tambah Data</button>
                 </x-slot>
 
-                <x-table>
+                <x-table id="produk">
                     <x-slot name="thead">
                         <th style="width: 6%">No</th>
-                        <th>Kode</th>
                         <th>Nama Produk</th>
-                        <th>Kategori</th>
-                        <th>Harga Jual</th>
+                        <th>Provider</th>
                         <th>Harga Beli</th>
+                        <th>Harga Jual</th>
                         <th>Stok</th>
                         <th>Aksi</th>
                     </x-slot>
@@ -33,6 +32,7 @@
     </div>
 
     @include('produk.form')
+    @include('produk.show')
 @endsection
 
 @include('includes.datatables')

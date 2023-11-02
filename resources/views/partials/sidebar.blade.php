@@ -72,9 +72,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('produk.index') }}" class="nav-link {{ request()->is('produk*') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-cubes"></i>
+                                <i class="nav-icon fa fa-money-check"></i>
                                 <p>
-                                    Produk
+                                    Vocer
                                 </p>
                             </a>
                         </li>

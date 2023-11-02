@@ -10,8 +10,8 @@ class Produk extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function kategori()
+    public function provider()
     {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(Provider::class);
     }
 }
