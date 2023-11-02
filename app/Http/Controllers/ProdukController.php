@@ -160,4 +160,13 @@ class ProdukController extends Controller
 
         return response()->json(['data' => NULL, 'message' => 'Data produk berhasil dihapus']);
     }
+
+    function search(Request $request)
+    {
+        $keyword = $request->get('q');
+
+        $produk = Produk::where('nama_produk', 'LIKE', "%$keyword%")->get();
+
+        return $produk;
+    }
 }

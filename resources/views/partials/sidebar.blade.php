@@ -79,6 +79,14 @@
                             </a>
                         </li>
                         <li class="nav-header">TRANSAKSI</li>
+                         <li class="nav-item">
+                            <a href="{{ route('pembelian.index') }}" class="nav-link {{ request()->is('pembelian*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-download"></i>
+                                <p>
+                                    Pembelian
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link {{ request()->is('admin/category*') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-money-check"></i>
@@ -87,14 +95,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link {{ request()->is('admin/category*') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-download"></i>
-                                <p>
-                                    Pembelian
-                                </p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="#" class="nav-link {{ request()->is('admin/category*') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-upload"></i>
