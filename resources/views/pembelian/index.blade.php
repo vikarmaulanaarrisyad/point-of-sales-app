@@ -22,8 +22,8 @@
                         <th>Kode Transaksi</th>
                         <th>Produk</th>
                         <th>Qty</th>
-                        <th>Harga</th>
-                        <th>Saldo</th>
+                        <th>Jenis Pulsa</th>
+                        <th>Harga Jual</th>
                         <th>Aksi</th>
                     </x-slot>
                 </x-table>

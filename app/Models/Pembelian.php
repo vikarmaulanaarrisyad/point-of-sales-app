@@ -14,4 +14,14 @@ class Pembelian extends Model
     {
         return $this->belongsTo(Produk::class);
     }
+
+    public function pulsa()
+    {
+        return $this->belongsTo(Pulsa::class);
+    }
+
+    public function pulsa_saldo()
+    {
+        return $this->belongsTo(SaldoPulsa::class);
+    }
 }

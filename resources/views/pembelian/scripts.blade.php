@@ -6,6 +6,7 @@
 
         let opsiPilihan = document.getElementById("opsiPilihan");
 
+        let pulsa = document.getElementById("Inputpulsa");
         let pulsaInput = document.getElementById("pulsaInput");
         let hargaPulsa = document.getElementById("hargaPulsa");
         let produk = document.getElementById("produk");
@@ -43,10 +44,10 @@
                     data: 'jumlah_pembelian',
                 },
                 {
-                    data: 'harga',
+                    data: 'pulsa',
                 },
                 {
-                    data: 'saldo_pulsa',
+                    data: 'harga',
                 },
                 {
                     data: 'aksi',
@@ -201,13 +202,15 @@
     <script>
         function toggleInput() {
             if (opsiPilihan.value === "pulsa") {
-                pulsaInput.style.display = "block";
-                hargaPulsa.style.display = "block";
+                pulsa.style.display = "block";
+                pulsaInput.style.display = "none";
+                hargaPulsa.style.display = "none";
                 produk.style.display = "none";
                 jumlahPembelian.style.display = "none";
                 harga.style.display = "none";
                 resetFields();
             } else if (opsiPilihan.value === "vocer") {
+                pulsa.style.display = "none";
                 pulsaInput.style.display = "none";
                 hargaPulsa.style.display = "none";
                 produk.style.display = "block";
@@ -215,6 +218,7 @@
                 harga.style.display = "block";
                 resetFields();
             } else if (opsiPilihan.value === "lainya") {
+                pulsa.style.display = "none";
                 pulsaInput.style.display = "none";
                 hargaPulsa.style.display = "none";
                 produk.style.display = "block";
@@ -228,6 +232,7 @@
         }
 
         function resetFields() {
+            $('[name=pulsa]').val('');
             $('[name=saldo_pulsa]').val('');
             $('[name=harga_pulsa]').val('');
             $('[name=harga]').val('');
@@ -236,6 +241,7 @@
         }
 
         function hiddenFields() {
+            pulsa.style.display = "none";
             pulsaInput.style.display = "none";
             hargaPulsa.style.display = "none";
             produk.style.display = "none";
@@ -265,5 +271,29 @@
                 }
             }
         });
+    </script>
+
+
+    <script>
+        $('#pulsa').select2({
+            placeholder: 'Pilih jenis pulsa',
+            theme: 'bootstrap4',
+            closeOnSelect: true,
+            allowClear: true,
+            ajax: {
+                url: '{{ route('pulsa.search') }}',
+                processResults: function(data) {
+                    console.log(data);
+                    return {
+                        results: data.map(function(item) {
+                            return {
+                                id: item.id,
+                                text:item.provider.nama_provider + ' Nominal ' + format_uang(item.nominal),
+                            }
+                        })
+                    }
+                }
+            }
+        })
     </script>
 @endpush

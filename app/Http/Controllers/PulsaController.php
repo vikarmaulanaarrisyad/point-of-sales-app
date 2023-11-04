@@ -143,4 +143,12 @@ class PulsaController extends Controller
 
         return response()->json(['data' => NULL, 'message' => 'Data pulsa berhasil dihapus']);
     }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->get('q');
+
+        $pulsa = Pulsa::with('provider')->where('nominal', 'LIKE', "%$keyword%")->get();
+        return $pulsa;
+    }
 }

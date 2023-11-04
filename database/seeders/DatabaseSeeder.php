@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             UserTableSeeder::class,
             ProviderTableSeeder::class,
+            PulsaTableSeeder::class,
+            ProdukTableSeeder::class,
         ]);
     }
 }
