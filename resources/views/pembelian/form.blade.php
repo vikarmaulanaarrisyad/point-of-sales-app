@@ -17,6 +17,14 @@
             </div>
         </div>
     </div>
+    <div class="row" id="Inputpulsa" style="display: none">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group">
+                <label for="pulsa">Pilih jenis pulsa <span class="text-danger">*</span> </label>
+                <select name="pulsa" id="pulsa" class="select2"></select>
+            </div>
+        </div>
+    </div>
     <div id="pulsaInput" style="display: none;" class="row">
         <div class="col-md-12 col-lg-12 col-sm-12">
             <div class="form-group">

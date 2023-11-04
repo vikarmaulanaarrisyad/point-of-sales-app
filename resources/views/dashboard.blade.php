@@ -7,7 +7,7 @@
 
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ format_uang($saldoPulsa->saldo_pulsa) }}</h3>
+                    <h3>{{ format_uang($saldoPulsa ?? 0) }}</h3>
                     <p>Saldo Pulsa</p>
                 </div>
                 <div class="icon">

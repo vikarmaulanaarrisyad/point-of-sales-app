@@ -43,6 +43,8 @@ Route::group([
     // Pulsa
     Route::get('/pulsa/data', [PulsaController::class, 'data'])->name('pulsa.data');
     Route::resource('/pulsa', PulsaController::class);
+    Route::get('/ajax/pulsa/search', [PulsaController::class, 'search'])->name('pulsa.search');
+
 
     // Produk
     Route::get('/produk/data', [ProdukController::class, 'data'])->name('produk.data');
