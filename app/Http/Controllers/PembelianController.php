@@ -32,9 +32,11 @@ class PembelianController extends Controller
             })
             ->addColumn('produk', function ($pembelian) {
                 if (!$pembelian->produk) {
-                    return 'Nominal Pulsa ' . format_uang($pembelian->saldo_pulsa);
+                    // return 'Nominal Pulsa ' . format_uang($pembelian->saldo_pulsa);
+                    return 'Pulsa ';
                 }
-                return $pembelian->produk->nama_produk;
+                // return $pembelian->produk->nama_produk;
+                return 'Vocer';
             })
             ->editColumn('harga', function ($pembelian) {
                 if ($pembelian->produk_id) {
@@ -43,21 +45,22 @@ class PembelianController extends Controller
                 return format_uang($pembelian->pulsa->harga_jual);
             })
             ->editColumn('pulsa', function ($pembelian) {
+                if ($pembelian->saldo_pulsa == 0) {
+                    return $pembelian->produk->nama_produk;
+                }
                 return format_uang($pembelian->saldo_pulsa);
             })
             ->addColumn('aksi', function ($pembelian) {
                 // <button class="btn btn-sm btn-success" onclick="detailData(`' . route('pembelian.detail', $pembelian->id) . '`,`' . $pembelian->nama_produk . '`)"><i class="fas fa-eye"></i></button>
                 $button = '';
                 if (!$pembelian->produk) {
-
                     $button .=
                         '
-                        <button class="btn btn-sm btn-danger" onclick="deleteData(`' . route('pembelian.destroy', $pembelian->id) . '`,`' . $pembelian->saldo_pulsa . '`)"><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteData(`' . route('pembelian.destroy', $pembelian->id) . '`,`' . 'Pulsa ' . format_uang($pembelian->saldo_pulsa) . '`)"><i class="fas fa-trash"></i></button>
                     ';
                 } else {
-
                     $button .= '
-                 <button class="btn btn-sm btn-danger" onclick="deleteData(`' . route('pembelian.destroy', $pembelian->id) . '`,`' . $pembelian->produk->nama_produk . '`)"><i class="fas fa-trash"></i></button>
+                 <button class="btn btn-sm btn-danger" onclick="deleteData(`' . route('pembelian.destroy', $pembelian->id) . '`,`' . 'Vocer ' . $pembelian->produk->nama_produk . '`)"><i class="fas fa-trash"></i></button>
 
                 ';
                 }
@@ -99,6 +102,7 @@ class PembelianController extends Controller
                 $pulsa = Pulsa::findOrFail($request->pulsa); // return id pulsa
                 unset($rules['vocer'], $rules['harga'], $rules['jumlah_pembelian']);
             } elseif ($request->type === 'vocer') {
+                $produk = Produk::findOrFail($request->vocer); // return id vocer
                 unset($rules['saldo_pulsa'], $rules['harga_pulsa']);
             }
 
@@ -118,8 +122,8 @@ class PembelianController extends Controller
                 'pulsa_id' =>  $request->type === 'pulsa' ? $request->pulsa : 0,
                 'kode_pembelian' => 'P-' . rand(100000, 999999),
                 'jumlah_pembelian' => $request->jumlah_pembelian ?? 1,
-                'harga_satuan' => $request->type === 'vocer' ? $harga : $pulsa->harga_beli,
-                'total_harga_pembelian' => $request->type === 'vocer' ? $harga * $request->jumlah_pembelian : $pulsa->harga_beli,
+                'harga_satuan' => $request->type === 'vocer' ? $produk->harga_beli : $pulsa->harga_beli,
+                'total_harga_pembelian' => $request->type === 'vocer' ? $produk->harga_beli * $request->jumlah_pembelian : $pulsa->harga_beli,
                 'saldo_pulsa' => $request->type === 'pulsa' ? $pulsa->nominal : 0,
             ];
 

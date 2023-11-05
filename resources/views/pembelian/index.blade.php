@@ -22,7 +22,7 @@
                         <th>Kode Transaksi</th>
                         <th>Produk</th>
                         <th>Qty</th>
-                        <th>Jenis Pulsa</th>
+                        <th>Nominal</th>
                         <th>Harga Jual</th>
                         <th>Aksi</th>
                     </x-slot>

@@ -215,7 +215,7 @@
                 hargaPulsa.style.display = "none";
                 produk.style.display = "block";
                 jumlahPembelian.style.display = "block";
-                harga.style.display = "block";
+                harga.style.display = "none";
                 resetFields();
             } else if (opsiPilihan.value === "lainya") {
                 pulsa.style.display = "none";
@@ -223,7 +223,7 @@
                 hargaPulsa.style.display = "none";
                 produk.style.display = "block";
                 jumlahPembelian.style.display = "block";
-                harga.style.display = "block";
+                harga.style.display = "none";
                 resetFields();
             } else {
                 hiddenFields();
