@@ -5,7 +5,7 @@
 
     @method('POST')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-lg-12">
             <div class="form-group">
                 <label for="provider">Provider <span class="text-danger">*</span> </label>
                 <select name="provider" id="provider" class="select2"></select>
@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-lg-12">
             <div class="form-group">
                 <label for="nominal">Nominal</label>
                 <input type="text" name="nominal" class="form-control" id="nominal" autocomplete="off"
@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-lg-12">
             <label for="harga_beli">Harga Beli</label>
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mt-2">
+        <div class="col-md-12 col-lg-12 mt-2">
             <label for="harga_jual">Harga Jual</label>
             <div class="input-group">
                 <div class="input-group-prepend">

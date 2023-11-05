@@ -25,6 +25,9 @@ class PembelianController extends Controller
         $query = Pembelian::with('produk')->latest()->get();
         return datatables($query)
             ->addIndexColumn()
+            ->editColumn('created_at', function ($pembelian) {
+                return tanggal_indonesia($pembelian->created_at);
+            })
             ->editColumn('kode_pembelian', function ($pembelian) {
                 return '
                     <span class="badge badge-success">' . $pembelian->kode_pembelian . '</span>

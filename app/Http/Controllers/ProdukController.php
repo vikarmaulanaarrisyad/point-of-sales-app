@@ -58,7 +58,7 @@ class ProdukController extends Controller
             'nama_produk' => 'required|min:1',
             'harga_jual' => 'required|regex:/^[0-9.]+$/',
             'harga_beli' => 'required|regex:/^[0-9.]+$/',
-            'stok_awal' => 'required',
+            'stok_awal' => 'nullable',
             'provider' => 'required',
         ];
 
@@ -121,7 +121,7 @@ class ProdukController extends Controller
             'nama_produk' => 'required|min:1',
             'harga_jual' => 'required|regex:/^[0-9.]+$/',
             'harga_beli' => 'required|regex:/^[0-9.]+$/',
-            'stok_awal' => 'required',
+            'stok_awal' => 'nullable',
             'provider' => 'required',
         ];
 

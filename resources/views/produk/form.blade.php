@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="display: none">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="form-group">
                 <label for="stok_awal">Stok Awal </label>

@@ -12,7 +12,6 @@
                     <option disabled selected>Pilih Transaksi</option>
                     <option value="pulsa">Pulsa</option>
                     <option value="vocer">Vocer</option>
-                    <option value="lainya">Lainnya</option>
                 </select>
             </div>
         </div>

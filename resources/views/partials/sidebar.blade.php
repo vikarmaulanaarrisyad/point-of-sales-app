@@ -88,7 +88,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link {{ request()->is('admin/category*') ? 'active' : '' }}">
+                            <a href="{{ route('pengeluaran.index') }}" class="nav-link {{ request()->is('pengeluaran*') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-money-check"></i>
                                 <p>
                                     Pengeluaran

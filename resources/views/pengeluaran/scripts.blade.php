@@ -4,16 +4,6 @@
         let modal = '#modal-form';
         let button = '#submitBtn';
 
-        let opsiPilihan = document.getElementById("opsiPilihan");
-
-        let pulsa = document.getElementById("Inputpulsa");
-        let pulsaInput = document.getElementById("pulsaInput");
-        let hargaPulsa = document.getElementById("hargaPulsa");
-        let produk = document.getElementById("produk");
-        let jumlahPembelian = document.getElementById("jumlahPembelian");
-        let harga = document.getElementById("harga");
-
-
         $(function() {
             $('#spinner-border').hide();
         });
@@ -27,7 +17,7 @@
                 "processing": "Mohon bersabar..."
             },
             ajax: {
-                url: '{{ route('pembelian.data') }}',
+                url: '{{ route('pengeluaran.data') }}',
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -35,22 +25,18 @@
                     sortable: false
                 },
                 {
-                    data: 'created_at',
+                    data: 'tanggal_pengeluaran',
+                    searchable: false,
                 },
                 {
-                    data: 'kode_pembelian',
+                    data: 'keterangan',
+                    searchable: false,
+                    sortable: false
                 },
                 {
-                    data: 'produk',
-                },
-                {
-                    data: 'jumlah_pembelian',
-                },
-                {
-                    data: 'pulsa',
-                },
-                {
-                    data: 'harga',
+                    data: 'total_pengeluaran',
+                    searchable: false,
+                    sortable: false
                 },
                 {
                     data: 'aksi',
@@ -60,36 +46,27 @@
             ]
         });
 
-        function addData(url, title = 'Tambah Data Pelanggan') {
+        function addData(url, title = 'Tambah Data Pengeluaran') {
             $(modal).modal('show');
             $(`${modal} .modal-title`).text(title);
             $(`${modal} form`).attr('action', url);
             $(`${modal} [name=_method]`).val('POST');
             $('#spinner-border').hide();
-            // $("#status_pemilihan").hide();
             $(button).show();
             $(button).prop('disabled', false);
             resetForm(`${modal} form`);
-            hiddenFields();
         }
 
-        function editData(url, title = 'Edit Data Pelanggan') {
+        function editData(url, title = 'Edit Data Pengeluaran') {
             $.get(url)
                 .done(response => {
                     $(modal).modal('show');
-
                     $(`${modal} .modal-title`).text(title);
-
                     $(`${modal} form`).attr('action', url);
-
                     $(`${modal} [name=_method]`).val('PUT');
-
                     $('#spinner-border').hide();
-
                     $(button).prop('disabled', false);
-
                     resetForm(`${modal} form`);
-
                     loopForm(response.data);
                 })
                 .fail(errors => {
@@ -200,104 +177,5 @@
                 }
             });
         }
-    </script>
-
-    <script>
-        function toggleInput() {
-            if (opsiPilihan.value === "pulsa") {
-                pulsa.style.display = "block";
-                pulsaInput.style.display = "none";
-                hargaPulsa.style.display = "none";
-                produk.style.display = "none";
-                jumlahPembelian.style.display = "none";
-                harga.style.display = "none";
-                resetFields();
-            } else if (opsiPilihan.value === "vocer") {
-                pulsa.style.display = "none";
-                pulsaInput.style.display = "none";
-                hargaPulsa.style.display = "none";
-                produk.style.display = "block";
-                jumlahPembelian.style.display = "block";
-                harga.style.display = "none";
-                resetFields();
-            } else if (opsiPilihan.value === "lainya") {
-                pulsa.style.display = "none";
-                pulsaInput.style.display = "none";
-                hargaPulsa.style.display = "none";
-                produk.style.display = "block";
-                jumlahPembelian.style.display = "block";
-                harga.style.display = "none";
-                resetFields();
-            } else {
-                hiddenFields();
-                resetFields();
-            }
-        }
-
-        function resetFields() {
-            $('[name=pulsa]').val('');
-            $('[name=saldo_pulsa]').val('');
-            $('[name=harga_pulsa]').val('');
-            $('[name=harga]').val('');
-            $('[name=jumlah_pembelian]').val('');
-            $('.select2').val(null).trigger('change');
-        }
-
-        function hiddenFields() {
-            pulsa.style.display = "none";
-            pulsaInput.style.display = "none";
-            hargaPulsa.style.display = "none";
-            produk.style.display = "none";
-            jumlahPembelian.style.display = "none";
-            harga.style.display = "none";
-        }
-    </script>
-
-    <script>
-        //Initialize Select2 Elements
-        $('#vocer').select2({
-            placeholder: 'Pilih vocer',
-            theme: 'bootstrap4',
-            closeOnSelect: true,
-            allowClear: true,
-            ajax: {
-                url: '{{ route('produk.search') }}',
-                processResults: function(data) {
-                    return {
-                        results: data.map(function(item) {
-                            return {
-                                id: item.id,
-                                text: item.nama_produk
-                            }
-                        })
-                    }
-                }
-            }
-        });
-    </script>
-
-
-    <script>
-        $('#pulsa').select2({
-            placeholder: 'Pilih jenis pulsa',
-            theme: 'bootstrap4',
-            closeOnSelect: true,
-            allowClear: true,
-            ajax: {
-                url: '{{ route('pulsa.search') }}',
-                processResults: function(data) {
-                    console.log(data);
-                    return {
-                        results: data.map(function(item) {
-                            return {
-                                id: item.id,
-                                text: item.provider.nama_provider + ' Nominal ' + format_uang(item
-                                    .nominal),
-                            }
-                        })
-                    }
-                }
-            }
-        })
     </script>
 @endpush

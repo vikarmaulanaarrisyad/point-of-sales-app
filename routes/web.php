@@ -4,6 +4,7 @@ use App\Http\Controllers\{
     DashboardController,
     PelangganController,
     PembelianController,
+    PengeluaranController,
     ProviderController,
     ProdukController,
     PulsaController,
@@ -45,15 +46,17 @@ Route::group([
     Route::resource('/pulsa', PulsaController::class);
     Route::get('/ajax/pulsa/search', [PulsaController::class, 'search'])->name('pulsa.search');
 
-
     // Produk
     Route::get('/produk/data', [ProdukController::class, 'data'])->name('produk.data');
     Route::resource('/produk', ProdukController::class)->except('edit');
     Route::get('/produk/{produk}/detail', [ProdukController::class, 'detail'])->name('produk.detail');
     Route::get('/ajax/produk/search', [ProdukController::class, 'search'])->name('produk.search');
 
-
     // Pembelian
     Route::get('/pembelian/data', [PembelianController::class, 'data'])->name('pembelian.data');
     Route::resource('/pembelian', PembelianController::class);
+
+    // Pengeluaran
+    Route::get('/pengeluaran/data', [PengeluaranController::class, 'data'])->name('pengeluaran.data');
+    Route::resource('/pengeluaran', PengeluaranController::class);
 });
